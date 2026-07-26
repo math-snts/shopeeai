@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrecifAI - Precificação Inteligente</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-zinc-950 text-white">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <button onclick="navigate('home')" class="flex items-center gap-3">
+        <i class="fa-solid fa-calculator text-3xl text-blue-500"></i>
+        <h1 class="text-2xl font-bold">PrecifAI</h1>
+      </button>
+      <nav class="hidden md:flex gap-8">
+        <button onclick="navigate('home')" class="nav-link hover:text-blue-400 transition" data-page="home">Início</button>
+        <button onclick="navigate('home', 'funcionalidades')" class="nav-link hover:text-blue-400 transition">Funcionalidades</button>
+        <button onclick="navigate('precificador')" class="nav-link hover:text-blue-400 transition" data-page="precificador">Precificador</button>
+        <button onclick="navigate('zpl')" class="nav-link hover:text-blue-400 transition" data-page="zpl">Gerador ZPL</button>
+      </nav>
+      <button onclick="navigate('precificador')"
+        class="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-medium transition">
+        Acessar Precificador
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  PAGE: HOME                                 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="page-home" class="page active">
+
+    <!-- HERO -->
+    <section class="hero-bg py-24">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-5xl md:text-6xl font-bold mb-6">
+          Precificação inteligente<br>para o seu negócio
+        </h2>
+        <p class="text-xl text-zinc-300 max-w-2xl mx-auto mb-10">
+          Automatize, otimize e tome decisões de preço com inteligência artificial.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="navigate('precificador')"
+            class="bg-white text-zinc-900 px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-zinc-100 transition">
+            Experimentar Agora
+          </button>
+          <button onclick="navigate('home', 'funcionalidades')"
+            class="border border-white/50 hover:bg-white/10 px-8 py-4 rounded-2xl font-medium text-lg transition">
+            Ver Funcionalidades
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNCIONALIDADES -->
+    <section id="funcionalidades" class="py-20 bg-zinc-900">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-4">Funcionalidades</h2>
+        <p class="text-zinc-400 text-center mb-12 max-w-md mx-auto">
+          Tudo que você precisa para precificar com estratégia e inteligência
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div onclick="navigate('precificador')" class="card-hover bg-zinc-800 border border-zinc-700 rounded-3xl p-8 cursor-pointer">
+            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-chart-line text-3xl text-blue-500"></i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3">Precificador Inteligente</h3>
+            <p class="text-zinc-400">Calcule preços ideais com base em custos, concorrência e margem desejada.</p>
+            <span class="text-blue-400 text-sm mt-6 inline-block">Acessar →</span>
+          </div>
+
+          <div onclick="showFeature(2)" class="card-hover bg-zinc-800 border border-zinc-700 rounded-3xl p-8 cursor-pointer">
+            <div class="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-brain text-3xl text-emerald-500"></i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3">Análise de Concorrência</h3>
+            <p class="text-zinc-400">Compare seus preços automaticamente com o mercado.</p>
+            <span class="text-emerald-400 text-sm mt-6 inline-block">Saiba mais →</span>
+          </div>
+
+          <div onclick="navigate('zpl')" class="card-hover bg-zinc-800 border border-zinc-700 rounded-3xl p-8 cursor-pointer">
+            <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fa-solid fa-tag text-3xl text-orange-400"></i>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3">Gerador de Etiquetas</h3>
+            <p class="text-zinc-400">Converta arquivos ZPL da Shopee em PDF prontos para impressão.</p>
+            <span class="text-orange-400 text-sm mt-6 inline-block">Acessar →</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-zinc-800">
+      <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500">
+        <p>© 2026 PrecifAI - Todos os direitos reservados</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  PAGE: PRECIFICADOR                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="page-precificador" class="page">
+
+    <section class="bg-gradient-to-br from-zinc-900 to-zinc-950 border-b border-zinc-800 py-12">
+      <div class="max-w-7xl mx-auto px-6 flex items-center gap-4">
+        <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center">
+          <i class="fa-solid fa-chart-line text-2xl text-blue-500"></i>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold">Precificador Shopee</h2>
+          <p class="text-zinc-400">Calcule comissão, imposto e lucro para CNPJ e CPF — 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+        <!-- FORM -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+          <div class="flex bg-zinc-800 rounded-2xl p-1 mb-8">
+            <button id="tab-cnpj" onclick="switchTab('cnpj')"
+              class="flex-1 py-3 rounded-xl font-semibold text-sm transition tab-active">
+              <i class="fa-solid fa-building mr-2"></i>CNPJ
+            </button>
+            <button id="tab-cpf" onclick="switchTab('cpf')"
+              class="flex-1 py-3 rounded-xl font-semibold text-sm transition tab-inactive">
+              <i class="fa-solid fa-user mr-2"></i>CPF
+            </button>
+          </div>
+
+          <!-- MODO: DIRETO / REVERSO -->
+          <div class="flex bg-zinc-800/60 rounded-xl p-1 mb-6 text-xs">
+            <button id="modo-direto-btn" onclick="switchModo('direto')"
+              class="flex-1 py-2.5 rounded-lg font-semibold transition tab-active">
+              Já tenho o preço
+            </button>
+            <button id="modo-reverso-btn" onclick="switchModo('reverso')"
+              class="flex-1 py-2.5 rounded-lg font-semibold transition tab-inactive">
+              Descobrir preço ideal
+            </button>
+          </div>
+
+          <div class="space-y-5">
+
+            <div>
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-box text-blue-400 mr-2"></i>Custo do Produto (R$)
+              </label>
+              <input type="number" id="custo" step="0.01" placeholder="Ex: 80,00"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+            </div>
+
+            <!-- MODO DIRETO: preço de venda -->
+            <div id="campo-precoVenda">
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-tag text-blue-400 mr-2"></i>Preço de Venda (R$)
+              </label>
+              <input type="number" id="precoVenda" step="0.01" placeholder="Ex: 149,90"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+            </div>
+
+            <!-- MODO REVERSO: lucro desejado -->
+            <div id="campo-lucro" class="hidden">
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-sack-dollar text-blue-400 mr-2"></i>Lucro Desejado
+              </label>
+              <div class="flex bg-zinc-800 rounded-xl p-1 mb-3 text-xs">
+                <button id="lucro-valor-btn" onclick="switchLucroModo('valor')"
+                  class="flex-1 py-2 rounded-lg font-semibold transition tab-active">R$ fixo</button>
+                <button id="lucro-margem-btn" onclick="switchLucroModo('margem')"
+                  class="flex-1 py-2 rounded-lg font-semibold transition tab-inactive">% de margem</button>
+              </div>
+              <input type="number" id="lucroValor" step="0.01" placeholder="Ex: 20,00"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+              <input type="number" id="lucroMargem" step="0.1" placeholder="Ex: 25"
+                class="hidden w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-percent text-blue-400 mr-2"></i>Alíquota de Imposto (%)
+              </label>
+              <input type="number" id="aliquotaImposto" step="0.1" value="6"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white transition">
+            </div>
+
+            <div id="volume-group" class="hidden">
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-boxes-stacked text-blue-400 mr-2"></i>Volume de pedidos (últimos 90 dias)
+              </label>
+              <select id="volumeCpf"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white transition">
+                <option value="baixo">Menos de 450 pedidos</option>
+                <option value="alto">450 ou mais pedidos</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-users text-blue-400 mr-2"></i>Comissão de Afiliados (%)
+                <span class="text-zinc-500 font-normal normal-case">— opcional</span>
+              </label>
+              <input type="number" id="afiliadoPct" step="0.1" value="0" placeholder="Ex: 5"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+            </div>
+
+            <div>
+              <label class="flex items-center gap-2 text-sm font-semibold text-zinc-300 mb-2 cursor-pointer">
+                <input type="checkbox" id="usarAds" onchange="toggleAds()" class="w-4 h-4 rounded accent-blue-600">
+                <i class="fa-solid fa-bullhorn text-blue-400"></i>Incluir custo com Ads
+                <span class="text-zinc-500 font-normal normal-case">— opcional</span>
+              </label>
+              <div id="ads-fields" class="hidden mt-2">
+                <div class="flex bg-zinc-800 rounded-xl p-1 mb-3 text-xs">
+                  <button id="ads-pct-btn" onclick="switchAdsModo('pct')"
+                    class="flex-1 py-2 rounded-lg font-semibold transition tab-active">% do preço (ROAS)</button>
+                  <button id="ads-valor-btn" onclick="switchAdsModo('valor')"
+                    class="flex-1 py-2 rounded-lg font-semibold transition tab-inactive">R$ fixo por venda</button>
+                </div>
+                <input type="number" id="adsPct" step="0.1" placeholder="Ex: 10"
+                  class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+                <input type="number" id="adsValor" step="0.01" placeholder="Ex: 5,00"
+                  class="hidden w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+              </div>
+            </div>
+
+          </div>
+
+          <button onclick="calcular()"
+            class="mt-8 w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-bold text-lg transition flex items-center justify-center gap-3">
+            <i class="fa-solid fa-calculator"></i>Calcular Precificação
+          </button>
+
+          <div class="mt-6 bg-zinc-800/60 border border-zinc-700 rounded-2xl p-5">
+            <p id="regrasComissaoTitulo" class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Regras de Comissão CNPJ — 2026</p>
+            <div id="regrasComissaoBody" class="space-y-2 text-sm text-zinc-400">
+              <div class="flex justify-between"><span>Até R$ 79,99</span><span class="text-zinc-200">20% + R$ 4,00</span></div>
+              <div class="flex justify-between"><span>R$ 80 ~ R$ 99,99</span><span class="text-zinc-200">14% + R$ 16,00</span></div>
+              <div class="flex justify-between"><span>R$ 100 ~ R$ 199,99</span><span class="text-zinc-200">14% + R$ 20,00</span></div>
+              <div class="flex justify-between"><span>R$ 200 ~ R$ 499,99</span><span class="text-zinc-200">14% + R$ 26,00</span></div>
+              <div class="flex justify-between"><span>Acima de R$ 500</span><span class="text-zinc-200">14% + R$ 28,00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div>
+          <div id="resultado" class="hidden bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-circle-check text-emerald-500"></i>
+              </div>
+              <h3 class="text-xl font-bold">Resultado</h3>
+            </div>
+            <div id="detalhes" class="space-y-1"></div>
+          </div>
+          <div id="placeholder-prec" class="bg-zinc-900/50 border border-dashed border-zinc-800 rounded-3xl p-12 flex flex-col items-center justify-center text-center">
+            <div class="w-16 h-16 bg-zinc-800 rounded-2xl flex items-center justify-center mb-4">
+              <i class="fa-solid fa-chart-pie text-3xl text-zinc-600"></i>
+            </div>
+            <p class="text-zinc-500 font-medium">Preencha os campos ao lado</p>
+            <p class="text-zinc-600 text-sm mt-1">O resultado aparecerá aqui</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="bg-black py-12 border-t border-zinc-800 mt-10">
+      <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500">
+        <p>© 2026 PrecifAI - Todos os direitos reservados</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  PAGE: GERADOR ZPL                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="page-zpl" class="page">
+
+    <section class="bg-gradient-to-br from-zinc-900 to-zinc-950 border-b border-zinc-800 py-12">
+      <div class="max-w-7xl mx-auto px-6 flex items-center gap-4">
+        <div class="w-12 h-12 bg-orange-500/10 rounded-2xl flex items-center justify-center">
+          <i class="fa-solid fa-tag text-2xl text-orange-400"></i>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold">Gerador de Etiquetas</h2>
+          <p class="text-zinc-400">Converta arquivos ZPL da Shopee em PDF para impressão</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+        <!-- UPLOAD + CONFIG -->
+        <div class="space-y-6">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+            <h3 class="font-bold text-lg mb-6 flex items-center gap-2">
+              <i class="fa-solid fa-upload text-blue-400"></i> Arquivos
+            </h3>
+
+            <div id="dropZone"
+              class="border-2 border-dashed border-zinc-700 rounded-2xl p-10 text-center cursor-pointer transition mb-5"
+              onclick="document.getElementById('fileInput').click()">
+              <i class="fa-solid fa-cloud-arrow-up text-4xl text-zinc-500 mb-3 block"></i>
+              <p class="text-zinc-300 font-medium">Arraste arquivos aqui</p>
+              <p class="text-zinc-500 text-sm mt-1">ou clique para selecionar</p>
+              <p class="text-zinc-600 text-xs mt-3">.txt ou .zip suportados</p>
+            </div>
+
+            <input type="file" id="fileInput" multiple accept=".txt,.zip" class="hidden">
+
+            <div id="fileListDisplay" class="hidden mb-5">
+              <div id="fileItems" class="space-y-2"></div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-zinc-300 mb-2">
+                <i class="fa-solid fa-at text-blue-400 mr-2"></i>Rede Social (aparece na etiqueta)
+              </label>
+              <input type="text" id="redeSocial" placeholder="@sua_loja"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 transition">
+            </div>
+
+            <div class="flex gap-3 mt-6">
+              <button onclick="processar()"
+                class="flex-1 bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-bold transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-pdf"></i> Gerar PDF
+              </button>
+              <button onclick="limparArquivos()"
+                class="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-5 py-4 rounded-2xl transition"
+                title="Limpar arquivos">
+                <i class="fa-solid fa-trash text-zinc-400"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-6">
+            <p class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-4">Como usar</p>
+            <div class="space-y-3">
+              <div class="flex gap-3 text-sm text-zinc-400">
+                <span class="w-6 h-6 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                <span>Baixe os arquivos de etiquetas (.txt ou .zip) no Painel do Vendedor da Shopee</span>
+              </div>
+              <div class="flex gap-3 text-sm text-zinc-400">
+                <span class="w-6 h-6 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                <span>Faça upload dos arquivos aqui ou arraste e solte na área acima</span>
+              </div>
+              <div class="flex gap-3 text-sm text-zinc-400">
+                <span class="w-6 h-6 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                <span>Informe sua rede social (opcional) e clique em Gerar PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROGRESSO + LOG -->
+        <div class="space-y-6">
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+            <h3 class="font-bold text-lg mb-6 flex items-center gap-2">
+              <i class="fa-solid fa-spinner text-orange-400"></i> Progresso
+            </h3>
+            <div class="bg-zinc-800 rounded-full h-3 overflow-hidden mb-3">
+              <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="flex justify-between text-sm text-zinc-500 mb-6">
+              <span id="progressText">Aguardando...</span>
+              <span id="eta">--</span>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="bg-zinc-800/60 rounded-2xl p-4 text-center">
+                <p class="text-2xl font-bold text-blue-400" id="statTotal">0</p>
+                <p class="text-xs text-zinc-500 mt-1">Total</p>
+              </div>
+              <div class="bg-zinc-800/60 rounded-2xl p-4 text-center">
+                <p class="text-2xl font-bold text-emerald-400" id="statOk">0</p>
+                <p class="text-xs text-zinc-500 mt-1">Concluídas</p>
+              </div>
+              <div class="bg-zinc-800/60 rounded-2xl p-4 text-center">
+                <p class="text-2xl font-bold text-red-400" id="statErr">0</p>
+                <p class="text-xs text-zinc-500 mt-1">Erros</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-lg flex items-center gap-2">
+                <i class="fa-solid fa-terminal text-zinc-400"></i> Log
+              </h3>
+              <button onclick="document.getElementById('statusPanel').innerHTML=''"
+                class="text-zinc-600 hover:text-zinc-400 text-xs transition">Limpar</button>
+            </div>
+            <div id="statusPanel"
+              class="bg-zinc-950 rounded-2xl p-4 h-48 overflow-y-auto font-mono text-xs text-zinc-400 space-y-1">
+              <div class="text-zinc-600">Pronto para processar etiquetas...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="bg-black py-12 border-t border-zinc-800 mt-10">
+      <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500">
+        <p>© 2026 PrecifAI - Todos os direitos reservados</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL (home) -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-lg w-full mx-4 p-8" id="modal-content"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  SCRIPTS                                    -->
+  <!-- ═══════════════════════════════════════════ -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2); }
+
+/* SPA nav */
+.page { display: none; }
+.page.active { display: block; }
+.nav-link.active-nav { color: #60a5fa; }
+
+/* Precificador */
+.tab-active { background: #2563eb; color: white; }
+.tab-inactive { color: #a1a1aa; }
+.tab-inactive:hover { color: white; }
+.result-row { border-bottom: 1px solid #27272a; }
+.result-row:last-child { border-bottom: none; }
+input:focus, select:focus { outline: none; border-color: #3b82f6; }
+input[type=number]::-webkit-inner-spin-button { opacity: 0.5; }
+
+/* ZPL */
+.drop-zone-active { border-color: #3b82f6 !important; background: rgba(59,130,246,0.05); }
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
